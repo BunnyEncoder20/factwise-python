@@ -1,9 +1,14 @@
-class ProjectBoardBase:
+# Converted TeamBase class to Abstract class and methods for concrete implementation
+
+from abc import ABC, abstractmethod
+
+class ProjectBoardBase(ABC):
     """
     A project board is a unit of delivery for a project. Each board will have a set of tasks assigned to a user.
     """
 
     # create a board
+    @abstractmethod
     def create_board(self, request: str):
         """
         :param request: A json string with the board details.
@@ -23,6 +28,7 @@ class ProjectBoardBase:
         pass
 
     # close a board
+    @abstractmethod
     def close_board(self, request: str) -> str:
         """
         :param request: A json string with the user details
@@ -39,6 +45,7 @@ class ProjectBoardBase:
         pass
 
     # add task to board
+    @abstractmethod
     def add_task(self, request: str) -> str:
         """
         :param request: A json string with the task details. Task is assigned to a user_id who works on the task
@@ -61,6 +68,7 @@ class ProjectBoardBase:
         pass
 
     # update the status of a task
+    @abstractmethod
     def update_task_status(self, request: str):
         """
         :param request: A json string with the user details
@@ -72,6 +80,7 @@ class ProjectBoardBase:
         pass
 
     # list all open boards for a team
+    @abstractmethod
     def list_boards(self, request: str) -> str:
         """
         :param request: A json string with the team identifier
@@ -89,6 +98,7 @@ class ProjectBoardBase:
         """
         pass
 
+    @abstractmethod
     def export_board(self, request: str) -> str:
         """
         Export a board in the out folder. The output will be a txt file.

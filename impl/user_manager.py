@@ -34,7 +34,7 @@ class UserManager(UserBase):
             "name": name,
             "display_name": display_name,
             "description": f"User {display_name}",
-            "created_at": datetime.datetime.now().isoformat()
+            "creation_time": datetime.datetime.now().isoformat()
         }
         users[user_id] = user
         self.db.write(users)
@@ -47,24 +47,29 @@ class UserManager(UserBase):
             {
                 "name": user["name"],
                 "display_name": user["display_name"],
-                "created_at": user["created_at"]
+                "creation_time": user["creation_time"]
             } for user in users.values()
         ]
         return json.dumps(results)
 
 
     # TODO: Check this param name mismatch
-    def describe_user(self, json_str: str) -> str:
-        data = json.loads(json_str)
+    def describe_user(self, request: str) -> str:
+        data = json.loads(request)
         user_id = data.get("id")
         if not user_id:
-            raise ValueError("User Id is required")
+            raise ValueError("<user_id> is required")
 
         users = self.db.read()
         if user_id not in users:
-            raise ValueError(f"User with id:[{user_id}] does not exist")
+            raise ValueError(f"User with id:[{user_id}] not found")
 
-        return json.dumps({"status": "success", "user": users[user_id]})
+        user = users[user_id]
+        return json.dumps({
+            "name": user['name'],
+            "description": user['description'],
+            "creation_time": user['creation_time']
+        })
 
     def update_user(self, json_str: str) -> str:
         data = json.loads(json_str)

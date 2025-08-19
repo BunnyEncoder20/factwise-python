@@ -25,7 +25,17 @@ class UserManager(UserBase):
 
     def list_users(self) -> str:
         data = self.db.read()
-        if not data:
-            return json.dumps({"status": "success", "users": []})
-
         return json.dumps({"status": "success", "users": list(data.values())})
+
+    # TODO: Check this param name mismatch
+    def describe_user(self, json_str: str) -> str:
+        data = json.loads(json_str)
+        user_id = data.get("id")
+        if not user_id:
+            raise ValueError("User Id is required")
+
+        users = self.db.read()
+        if user_id not in users:
+            raise ValueError(f"User with id:[{user_id}] does not exist")
+
+        return json.dumps({"status": "success", "user": users[user_id]})

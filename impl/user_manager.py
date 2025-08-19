@@ -22,3 +22,10 @@ class UserManager(UserBase):
         self.db.write(users)
 
         return json.dumps({"status": "success", "user": data})
+
+    def list_users(self) -> str:
+        data = self.db.read()
+        if not data:
+            return json.dumps({"status": "success", "users": []})
+
+        return json.dumps({"status": "success", "users": list(data.values())})

@@ -91,3 +91,16 @@ class UserManager(UserBase):
 
         self.db.write(users)
         return json.dumps({"status": "success"})
+
+    def get_user_teams(self, request: str) -> str:
+        data = json.loads("id")
+        user_id = data.get("id")
+        if not user_id:
+            raise ValueError("<user_id> is required")
+
+        users = self.db.read()
+        if user_id not in users:
+            raise ValueError(f"User with id:[{user_id}] not found")
+
+        # TODO: neet to make Team Manager before returning here
+        return json.dumps([])

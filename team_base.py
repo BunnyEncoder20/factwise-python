@@ -1,4 +1,8 @@
-class TeamBase:
+# Converted TeamBase class to Abstract class and methods for concrete implementation
+
+from abc import ABC, abstractmethod
+
+class TeamBase(ABC):
     """
     Base interface implementation for API's to manage teams.
     For simplicity a single team manages a single project. And there is a separate team per project.
@@ -6,6 +10,7 @@ class TeamBase:
     """
 
     # create a team
+    @abstractmethod
     def create_team(self, request: str) -> str:
         """
         :param request: A json string with the team details
@@ -24,6 +29,7 @@ class TeamBase:
         pass
 
     # list all teams
+    @abstractmethod
     def list_teams(self) -> str:
         """
         :return: A json list with the response.
@@ -39,6 +45,7 @@ class TeamBase:
         pass
 
     # describe team
+    @abstractmethod
     def describe_team(self, request: str) -> str:
         """
         :param request: A json string with the team details
@@ -59,6 +66,7 @@ class TeamBase:
         pass
 
     # update team
+    @abstractmethod
     def update_team(self, request: str) -> str:
         """
         :param request: A json string with the team details
@@ -81,6 +89,7 @@ class TeamBase:
         pass
 
     # add users to team
+    @abstractmethod
     def add_users_to_team(self, request: str):
         """
         :param request: A json string with the team details
@@ -97,6 +106,7 @@ class TeamBase:
         pass
 
     # add users to team
+    @abstractmethod
     def remove_users_from_team(self, request: str):
         """
         :param request: A json string with the team details
@@ -113,6 +123,7 @@ class TeamBase:
         pass
 
     # list users of a team
+    @abstractmethod
     def list_team_users(self, request: str):
         """
         :param request: A json string with the team identifier
@@ -130,4 +141,3 @@ class TeamBase:
         ]
         """
         pass
-

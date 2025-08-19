@@ -42,8 +42,16 @@ class UserManager(UserBase):
         return json.dumps({"id": user_id})
 
     def list_users(self) -> str:
-        data = self.db.read()
-        return json.dumps({"status": "success", "users": list(data.values())})
+        users = self.db.read()
+        results = [
+            {
+                "name": user["name"],
+                "display_name": user["display_name"],
+                "created_at": user["created_at"]
+            } for user in users.values()
+        ]
+        return json.dumps(results)
+
 
     # TODO: Check this param name mismatch
     def describe_user(self, json_str: str) -> str:

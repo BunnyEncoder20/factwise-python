@@ -1,9 +1,14 @@
-class UserBase:
+# Converted the given base classes to Abstract classes for Implementing concrete classes
+
+from abc import ABC, abstractmethod
+
+class UserBase(ABC):
     """
     Base interface implementation for API's to manage users.
     """
 
     # create a user
+    @abstractmethod
     def create_user(self, request: str) -> str:
         """
         :param request: A json string with the user details
@@ -21,6 +26,7 @@ class UserBase:
         pass
 
     # list all users
+    @abstractmethod
     def list_users(self) -> str:
         """
         :return: A json list with the response
@@ -35,6 +41,7 @@ class UserBase:
         pass
 
     # describe user
+    @abstractmethod
     def describe_user(self, request: str) -> str:
         """
         :param request: A json string with the user details
@@ -54,6 +61,7 @@ class UserBase:
         pass
 
     # update user
+    @abstractmethod
     def update_user(self, request: str) -> str:
         """
         :param request: A json string with the user details
@@ -74,6 +82,8 @@ class UserBase:
         """
         pass
 
+    # get user teams
+    @abstractmethod
     def get_user_teams(self, request: str) -> str:
         """
         :param request:
@@ -91,4 +101,3 @@ class UserBase:
         ]
         """
         pass
-

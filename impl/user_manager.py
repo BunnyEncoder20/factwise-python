@@ -71,18 +71,23 @@ class UserManager(UserBase):
             "creation_time": user['creation_time']
         })
 
-    def update_user(self, json_str: str) -> str:
-        data = json.loads(json_str)
-        users = self.db.read()
-
+    def update_user(self, request: str) -> str:
+        data = json.loads(request)
         user_id = data.get("id")
+        updated_data = data.get("user", {})
         if not user_id:
-            raise ValueError("User Id is required")
+            raise ValueError("<user_id> is required")
 
+        users = self.db.read()
         if user_id not in users:
-            raise ValueError(f"User with id:[{user_id}] does not exist")
+            raise ValueError(f"User with id:[{user_id}] not found")
 
-        users[user_id] = data.get("user")
+        # Constraints check
+        if "name" in updated_data and updated_data["name"] == users[user_id]["name"]:
+            raise ValueError("username cannot be the updated")
+        if "display_name" in updated_data:
+            self._validate_name(updated_data["display_name"], 128)
+            users[user_id]["display_name"] = updated_data["display_name"]
+
         self.db.write(users)
-
-        return json.dumps({"status": "success", "user": data})
+        return json.dumps({"status": "success"})

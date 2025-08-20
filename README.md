@@ -62,7 +62,7 @@ self.boards = {
         "creation_time": "<ts>",
         "end_time": None,
         "status": "OPEN | IN_PROGRESS | COMPLETE"
-        "tasks": {}   # tasks dictionary keyed by task_id
+        #"tasks": {}   # tasks dictionary keyed by task_id
     }
 }
 

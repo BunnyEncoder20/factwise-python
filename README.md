@@ -16,7 +16,7 @@
 		- Shows I can design clean, modular and production-grade APIs.
 	- Assignment gives freedom of Python Library.
 
-Hence chose FastAPI for this assignment.
+Hence chose **FastAPI** for this assignment.
 
 ## Implementations Order:
 1. FileDB class (for persistent json storage)
@@ -24,6 +24,61 @@ Hence chose FastAPI for this assignment.
 3. Implementing Concrete User class. (Cause team and ProjectBoard will depend on it)
 4. Made some unittest to check functioning of UserManager Class
 5. Implementing Concrete Team class.
+6. Implementing Concrete ProjectBoard class.
+
+## Project Board Implementation Notes
+Implementation Notes
+- create_board
+    - Validate name uniqueness within the given team.
+    - Enforce max length on name (64) and description (128).
+    - Add board to self.boards.
+
+- close_board
+    - Only allowed if all tasks are "COMPLETE".
+    - Set status="CLOSED" and end_time=now.
+
+- add_task
+    - Check board exists and is OPEN.
+    - Task title unique within board.
+    - Enforce max length on title (64) and description (128).
+
+- update_task_status
+    - Change status among OPEN, IN_PROGRESS, COMPLETE.
+
+- list_boards
+    - Return all OPEN boards for a given team_id.
+
+- export_board
+    - Generate a .txt file in out/ folder.
+    - Pretty print board metadata + task list with statuses.
+
+```bash
+# Board Data Structure
+self.boards = {
+    "<board_id>": {
+        "id": "<board_id>",
+        "name": "<board_name>",
+        "description": "<desc>",
+        "team_id": "<team_id>",
+        "creation_time": "<ts>",
+        "end_time": None,
+        "status": "OPEN | CLOSED",
+        "tasks": {}   # tasks dictionary keyed by task_id
+    }
+}
+
+# Task Data Structure
+"tasks": {
+    "<task_id>": {
+        "id": "<task_id>",
+        "title": "<title>",
+        "description": "<desc>",
+        "user_id": "<assigned_user>",
+        "creation_time": "<ts>",
+        "status": "OPEN | IN_PROGRESS | COMPLETE"
+    }
+}
+```
 
 ## Important Commands:
 - running unit tests:

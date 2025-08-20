@@ -119,3 +119,30 @@ class TeamManager(TeamBase):
 
         self.team_db.write(teams)
         return json.dumps({"status": "success"})
+
+    def add_users_to_team(self, request: str) -> str:
+        data = json.loads(request)
+        team_id = data.get("id")
+        new_users = data.get("users", [])
+        teams = self.team_db.read()
+
+        if not team_id:
+            raise ValueError("Team id is required")
+
+        if team_id not in teams:
+            raise ValueError(f"Team with id:[{team_id}] not found")
+
+        users = self.user_db.read()
+        for uid in new_users:
+            if uid not in users:
+                raise ValueError(f"User id:[{uid}] not found")
+
+        team = teams[team_id]
+
+        combined_users = list(set(team["users"] + new_users))
+        if len(combined_users) > 50:
+            raise ValueError("Team cannot have more than 50 users")
+
+        teams[team_id]["users"] = combined_users
+        self.team_db.write(teams)
+        return json.dumps({"status": "success", "users": team["users"]})

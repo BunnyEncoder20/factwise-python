@@ -13,6 +13,7 @@ class FileDB:
                 json.dump({}, f)
 
     def read(self) -> Dict[str, Any]:
+        if not os.path.exists(self.path): return {}
         with open(self.path, 'r') as f:
             return json.load(f)
 

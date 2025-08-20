@@ -83,8 +83,8 @@ class UserManager(UserBase):
             raise ValueError(f"User with id:[{user_id}] not found")
 
         # Constraints check
-        if "name" in updated_data and updated_data["name"] == users[user_id]["name"]:
-            raise ValueError("username cannot be the updated")
+        if "name" in updated_data and updated_data["name"] != users[user_id]["name"]:
+            raise ValueError("username cannot be updated")
         if "display_name" in updated_data:
             self._validate_name(updated_data["display_name"], 128)
             users[user_id]["display_name"] = updated_data["display_name"]
@@ -93,7 +93,7 @@ class UserManager(UserBase):
         return json.dumps({"status": "success"})
 
     def get_user_teams(self, request: str) -> str:
-        data = json.loads("id")
+        data = json.loads(request)
         user_id = data.get("id")
         if not user_id:
             raise ValueError("<user_id> is required")

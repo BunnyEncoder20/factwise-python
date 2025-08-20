@@ -1,6 +1,7 @@
 import json
 import uuid
 import datetime
+import os
 
 from project_board_base import ProjectBoardBase
 from utils.file_db import FileDB
@@ -150,3 +151,38 @@ class BoardManager(ProjectBoardBase):
         ]
 
         return json.dumps(team_open_boards, indent=4)
+
+    def export_board(self, request: str) -> str:
+        board_id = json.loads(request).get("id")
+        if not board_id:
+            raise ValueError("Board id is required")
+
+        boards = self.board_db.read()
+        tasks = self.task_db.read()
+
+        if board_id not in boards:
+            raise ValueError(f"Board id:[{board_id}] not found")
+
+        board = boards[board_id]
+        board_tasks = [task for task in tasks.values() if task["board_id"] == board_id]
+
+        # Generating output file
+        os.makedirs("out", exist_ok=True)
+        output_file = f"out/{board_id}_{board['name'].replace(' ', '_')}.txt"
+
+        with open(output_file, 'w') as file:
+            file.write(f"Project Board: {board['name']}\n")
+            file.write(f"Description: {board['description']}\n")
+            file.write(f"Team ID: {board['team_id']}\n")
+            file.write(f"Status: {board['status']}\n")
+            file.write(f"Created: {board['creation_time']}\n")
+            file.write(f"Closed: {board.get('end_time', 'N/A')}\n")
+            file.write("\nTasks:\n")
+            for t in board_tasks:
+                file.write(f"  - {t['title']} [{t['status']}]\n")
+                file.write(f"    Assigned to: {t['user_id']}\n")
+                file.write(f"    Created: {t['creation_time']}\n")
+                file.write(f"    Description: {t['description']}\n\n")
+
+
+        return json.dumps({"out_file": output_file})

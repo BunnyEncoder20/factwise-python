@@ -50,7 +50,8 @@ class ProjectBoardBase(ABC):
         """
         :param request: A json string with the task details. Task is assigned to a user_id who works on the task
         {
-            "title" : "<board_name>",
+            "bid": "<board_id>"
+            "title" : "<task_title>",
             "description" : "<description>",
             "user_id" : "<team id>"
             "creation_time" : "<date:time when task was created>"

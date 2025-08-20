@@ -22,3 +22,10 @@ Hence chose FastAPI for this assignment.
 1. FileDB class (for persistent json storage)
 2. Converting all base classes into Abstract classes and methods
 3. Implementing Concrete User class. (Cause team and ProjectBoard will depend on it)
+4. Made some unittest to check functioning of UserManager Class
+
+## Important Commands:
+- running unit tests:
+```bash
+python3-m unittest tests/test_user_manager.py
+```

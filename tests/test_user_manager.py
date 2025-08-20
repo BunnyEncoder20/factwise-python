@@ -75,6 +75,14 @@ class TestUserManager(unittest.TestCase):
         user_id = json.loads(response)["id"]
 
         # Test updating the user's display name
+        long_diaplay_name = "a" * 129
+        request = json.dumps({
+            "id": user_id,
+            "user": {"display_name": long_diaplay_name}
+        })
+        with self.assertRaises(ValueError):
+            self.user_manager.update_user(request)
+
         request = json.dumps({
             "id": user_id,
             "user": {"display_name": "New Display Name"}

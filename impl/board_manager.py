@@ -134,3 +134,19 @@ class BoardManager(ProjectBoardBase):
         tasks[task_id]["status"] = updated_status
         self.task_db.write(tasks)
         return json.dumps({"id": task_id, "status": tasks[task_id]["status"]})
+
+    def list_boards(self, request: str) -> str:
+        team_id = json.loads(request).get("id")
+        if not team_id:
+            raise ValueError("Team id is required")
+
+        boards = self.board_db.read()
+        team_open_boards = [
+            {
+                "id": board["id"], "name": board["name"]
+            }
+            for board in boards.values()
+            if board["team"] == team_id and board["status"] == 'OPEN'
+        ]
+
+        return json.dumps(team_open_boards, indent=4)

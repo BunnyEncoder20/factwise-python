@@ -146,3 +146,21 @@ class TeamManager(TeamBase):
         teams[team_id]["users"] = combined_users
         self.team_db.write(teams)
         return json.dumps({"status": "success", "users": team["users"]})
+
+    def remove_users_from_team(self, request: str) -> str:
+        data = json.loads(request)
+        remove_users = data.get("users", [])
+        team_id = data.get("id")
+        if not team_id:
+            raise ValueError("Team id is required")
+
+        teams = self.team_db.read()
+        if team_id not in teams:
+            raise ValueError(f"Team with id:[{team_id}] not found")
+
+
+        # update the users list
+        teams[team_id]["users"] = [user for user in teams[team_id]["users"] if user not in remove_users]
+
+        self.team_db.write(teams)
+        return json.dumps({"status": "success", "users": teams[team_id]["users"]})

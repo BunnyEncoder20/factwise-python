@@ -23,6 +23,7 @@ Hence chose FastAPI for this assignment.
 2. Converting all base classes into Abstract classes and methods
 3. Implementing Concrete User class. (Cause team and ProjectBoard will depend on it)
 4. Made some unittest to check functioning of UserManager Class
+5. Implementing Concrete Team class.
 
 ## Important Commands:
 - running unit tests:

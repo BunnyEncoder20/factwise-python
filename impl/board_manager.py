@@ -3,7 +3,7 @@ import uuid
 import datetime
 import os
 
-from project_board_base import ProjectBoardBase
+from abstract_classes.project_board_base import ProjectBoardBase
 from utils.file_db import FileDB
 
 class BoardManager(ProjectBoardBase):

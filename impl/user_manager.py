@@ -2,7 +2,7 @@ import json
 import uuid
 import datetime
 
-from user_base import UserBase
+from abstract_classes.user_base import UserBase
 from utils.file_db import FileDB
 
 class UserManager(UserBase):

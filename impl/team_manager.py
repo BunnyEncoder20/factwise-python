@@ -2,7 +2,7 @@ import json
 import uuid
 import datetime
 
-from team_base import TeamBase
+from abstract_classes.team_base import TeamBase
 from utils.file_db import FileDB
 
 class TeamManager(TeamBase):

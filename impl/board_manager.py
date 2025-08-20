@@ -57,3 +57,23 @@ class BoardManager(ProjectBoardBase):
         self.board_db.write(boards)
 
         return json.dumps({"id":board_id})
+
+    def close_board(self, request: str) -> str:
+        data = json.loads(request)
+        board_id = data.get("id")
+        if not board_id:
+            raise ValueError("Board ID is required.")
+
+        boards = self.board_db.read()
+        if board_id not in boards:
+            raise ValueError(f"Board with ID:[{board_id}] not found.")
+
+        board = boards[board_id]
+        if board["status"] != "OPEN":
+            raise ValueError(f"Board with ID [{board_id}] is already closed.")
+
+        board["status"] = "CLOSED"
+        board["end_time"] = datetime.datetime.now().isoformat()
+        self.board_db.write(boards)
+
+        return json.dumps({"id":board_id, "status": f"{board["status"]} on {board["end_time"]}"})

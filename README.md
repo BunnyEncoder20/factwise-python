@@ -27,7 +27,6 @@ Hence chose **FastAPI** for this assignment.
 6. Implementing Concrete ProjectBoard class.
 
 ## Project Board Implementation Notes
-Implementation Notes
 - create_board
     - Validate name uniqueness within the given team.
     - Enforce max length on name (64) and description (128).
@@ -62,7 +61,7 @@ self.boards = {
         "team_id": "<team_id>",
         "creation_time": "<ts>",
         "end_time": None,
-        "status": "OPEN | CLOSED",
+        "status": "OPEN | IN_PROGRESS | COMPLETE"
         "tasks": {}   # tasks dictionary keyed by task_id
     }
 }
@@ -79,6 +78,16 @@ self.boards = {
     }
 }
 ```
+
+## Assumptions
+
+### Add Task method missing inputs
+- The input of the add_task method under project_board_base abstract class were unclear and incomplete.
+- I've assumped that the necessary details:
+    - board_id
+    - user_id
+- have been provided.
+- Have made the changes to the base abs class also.
 
 ## Important Commands:
 - running unit tests:

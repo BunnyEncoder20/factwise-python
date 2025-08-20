@@ -95,3 +95,7 @@ self.boards = {
 ```bash
 python3-m unittest tests/test_user_manager.py
 ```
+- installing requirements:
+```bash
+uv pip install -r requirements.txt
+```

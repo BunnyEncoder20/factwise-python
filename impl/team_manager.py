@@ -55,3 +55,15 @@ class TeamManager(TeamBase):
         self.team_db.write(teams)
 
         return json.dumps({"id": team_id})
+
+    def list_teams(self) -> str:
+        teams = self.team_db.read()
+        result = [{
+            # "id": team["id"],
+            "name": team["name"],
+            "description": team["description"],
+            "admin": team["admin"],
+            # "users": team["users"],
+            "creation_time": team["creation_time"]
+        } for team in teams.values()]
+        return json.dumps(result)

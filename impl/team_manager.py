@@ -27,11 +27,12 @@ class TeamManager(TeamBase):
         description = data.get("description", "")
         admin_id = data.get("admin")    # user id
 
-        self._validate_name(name, 64)
-        self._validate_description(description, 128)
-
         teams = self.team_db.read()
         users = self.user_db.read()
+
+        # enforce constraints
+        self._validate_name(name, 64)
+        self._validate_description(description, 128)
 
         # Team name must be unique
         if any(team["name"] == name for team in teams.values()):
@@ -59,12 +60,10 @@ class TeamManager(TeamBase):
     def list_teams(self) -> str:
         teams = self.team_db.read()
         result = [{
-            # "id": team["id"],
             "name": team["name"],
             "description": team["description"],
             "admin": team["admin"],
             "creation_time": team["creation_time"]
-            # "users": team["users"],
         } for team in teams.values()]
         return json.dumps(result)
 
@@ -84,5 +83,39 @@ class TeamManager(TeamBase):
             "description": team["description"],
             "admin": team["admin"],
             "creation_time": team["creation_time"]
-            # "users": team["users"],
         })
+
+    def update_team(self, request: str) -> str:
+        data = json.loads(request)
+        team_id = data.get("id")
+        updated_data = data.get("team", {})
+        teams = self.team_db.read()
+
+        if not team_id:
+            raise ValueError("Team id is required")
+        if team_id not in teams:
+            raise ValueError(f"Team with id:[{team_id}] not found")
+
+        # enforce constraints
+        if "name" in updated_data:
+            self._validate_name(updated_data["name"], 64)
+            if any(team["name"] == updated_data["name"] and tid != team_id for tid, team in teams.items()):
+                raise ValueError("Team name must be unique")
+            teams[team_id]["name"] = updated_data["name"]
+
+        if "description" in updated_data:
+            self._validate_description(updated_data["description"], 128)
+            teams[team_id]["description"] = updated_data["description"]
+
+        if "admin" in updated_data:
+            users = self.user_db.read()
+            if updated_data["admin"] not in users:
+                raise ValueError(f"Admin user with id:[{updated_data['admin']}] not found")
+            teams[team_id]["admin"] = updated_data["admin"]
+
+            # making sure new admin is part of team
+            if updated_data["admin"] not in teams[team_id]["users"]:
+                teams[team_id]["users"].append(updated_data["admin"])
+
+        self.team_db.write(teams)
+        return json.dumps({"status": "success"})

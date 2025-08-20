@@ -164,3 +164,26 @@ class TeamManager(TeamBase):
 
         self.team_db.write(teams)
         return json.dumps({"status": "success", "users": teams[team_id]["users"]})
+
+    def list_team_users(self, request: str) -> str:
+        data = json.loads(request)
+        team_id = data.get("id")
+
+        if not team_id:
+            raise ValueError("Team id is required")
+
+        teams = self.team_db.read()
+        if team_id not in teams:
+            raise ValueError(f"Team with id:[{team_id}] not found")
+
+        team = teams[team_id]
+        users = self.user_db.read()
+        results = [
+            {
+                "id": uid,
+                "name": users[uid]["name"],
+                "display_name": users[uid]["display_name"]
+            } for uid in team["users"] if uid in users  # user_ids stored in team['users']
+        ]
+
+        return json.dumps(results)

@@ -9,7 +9,7 @@ class ProjectBoardBase(ABC):
 
     # create a board
     @abstractmethod
-    def create_board(self, request: str):
+    def create_board(self, request: str) -> str:
         """
         :param request: A json string with the board details.
         {
@@ -69,7 +69,7 @@ class ProjectBoardBase(ABC):
 
     # update the status of a task
     @abstractmethod
-    def update_task_status(self, request: str):
+    def update_task_status(self, request: str) -> str:
         """
         :param request: A json string with the user details
         {

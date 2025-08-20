@@ -117,3 +117,20 @@ class BoardManager(ProjectBoardBase):
 
         self.task_db.write(tasks)
         return json.dumps({"id": task_id})
+
+
+    def update_task_status(self, request: str) -> str:
+        data = json.loads(request)
+        task_id = data.get("id")
+        updated_status = data.get("status")
+
+        if not task_id:
+            raise ValueError("Task id is required")
+
+        tasks = self.task_db.read()
+        if task_id not in tasks:
+            raise ValueError(f"Task id:[{task_id}] not found")
+
+        tasks[task_id]["status"] = updated_status
+        self.task_db.write(tasks)
+        return json.dumps({"id": task_id, "status": tasks[task_id]["status"]})

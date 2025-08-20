@@ -90,7 +90,7 @@ class TeamBase(ABC):
 
     # add users to team
     @abstractmethod
-    def add_users_to_team(self, request: str):
+    def add_users_to_team(self, request: str) -> str:
         """
         :param request: A json string with the team details
         {
@@ -107,7 +107,7 @@ class TeamBase(ABC):
 
     # add users to team
     @abstractmethod
-    def remove_users_from_team(self, request: str):
+    def remove_users_from_team(self, request: str) -> str:
         """
         :param request: A json string with the team details
         {
@@ -124,7 +124,7 @@ class TeamBase(ABC):
 
     # list users of a team
     @abstractmethod
-    def list_team_users(self, request: str):
+    def list_team_users(self, request: str) -> str:
         """
         :param request: A json string with the team identifier
         {

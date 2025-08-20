@@ -63,7 +63,26 @@ class TeamManager(TeamBase):
             "name": team["name"],
             "description": team["description"],
             "admin": team["admin"],
-            # "users": team["users"],
             "creation_time": team["creation_time"]
+            # "users": team["users"],
         } for team in teams.values()]
         return json.dumps(result)
+
+    def describe_team(self, request: str) -> str:
+        data = json.loads(request)
+        team_id = data.get("id")
+        if not team_id:
+            raise ValueError("Team id is required")
+
+        teams = self.team_db.read()
+        if team_id not in teams:
+            raise ValueError(f"Team with id:[{team_id}] does not exist")
+
+        team = teams[team_id]
+        return json.dumps({
+            "name": team["name"],
+            "description": team["description"],
+            "admin": team["admin"],
+            "creation_time": team["creation_time"]
+            # "users": team["users"],
+        })

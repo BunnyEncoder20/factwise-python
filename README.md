@@ -25,6 +25,7 @@ Hence chose **FastAPI** for this assignment.
 4. Made some unittest to check functioning of UserManager Class
 5. Implementing Concrete Team class.
 6. Implementing Concrete ProjectBoard class.
+7. Wrapping the Business Logic with FastAPI for backend endpoints
 
 ## Project Board Implementation Notes
 - create_board

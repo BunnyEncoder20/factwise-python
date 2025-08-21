@@ -9,7 +9,7 @@ class TeamManager(TeamBase):
     def __init__(self, team_db_path="db/teams.json", user_db_path="db/users.json"):
         self.team_db = FileDB(team_db_path)
         self.user_db = FileDB(user_db_path)
-
+    # TODO: Extract validate_name and validate_description to utils
     def _validate_name(self, name: str, max_len: int):
         if not name or len(name) > max_len:
             raise ValueError(f"Invalid team name. Name must be between 1 - {max_len} characters.")

@@ -12,7 +12,7 @@ def create_user(req: model.CreateUserRequest, manager: UserManager = Depends(get
     response_json = manager.create_user(req.model_dump_json())
     return json.loads(response_json)
 
-@router.get("/list", response_model=model.ListUsersResponse)
+@router.get("/", response_model=model.ListUsersResponse)
 def list_users(manager: UserManager = Depends(get_user_manager)):
     response_json = manager.list_users()
     return json.loads(response_json)

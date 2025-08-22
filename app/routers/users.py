@@ -27,7 +27,7 @@ def update_user(req: model.UpdateUserRequest, manager: UserManager = Depends(get
     response_json = manager.update_user(req.model_dump_json())
     return json.loads(response_json)
 
-@router.get("/get_teams", response_model=model.GetUserTeamsResponse)
+@router.get("/get_user_teams", response_model=model.GetUserTeamsResponse)
 def get_user_teams(req: model.GetUserTeamsRequest, manager: UserManager = Depends(get_user_manager)):
     response_json = manager.get_user_teams(req.model_dump_json())
     return json.loads(response_json)

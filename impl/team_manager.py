@@ -75,7 +75,7 @@ class TeamManager(TeamBase):
 
         teams = self.team_db.read()
         if team_id not in teams:
-            raise ValueError(f"Team with id:[{team_id}] does not exist")
+            raise ValueError(f"Team with id:{team_id} does not exist")
 
         team = teams[team_id]
         return json.dumps({
@@ -94,7 +94,7 @@ class TeamManager(TeamBase):
         if not team_id:
             raise ValueError("Team id is required")
         if team_id not in teams:
-            raise ValueError(f"Team with id:[{team_id}] not found")
+            raise ValueError(f"Team with id:{team_id} not found")
 
         # enforce constraints
         if "name" in updated_data:
@@ -130,7 +130,7 @@ class TeamManager(TeamBase):
             raise ValueError("Team id is required")
 
         if team_id not in teams:
-            raise ValueError(f"Team with id:[{team_id}] not found")
+            raise ValueError(f"Team with id:{team_id} not found")
 
         users = self.user_db.read()
         for uid in new_users:
@@ -156,7 +156,7 @@ class TeamManager(TeamBase):
 
         teams = self.team_db.read()
         if team_id not in teams:
-            raise ValueError(f"Team with id:[{team_id}] not found")
+            raise ValueError(f"Team with id:{team_id} not found")
 
 
         # update the users list
@@ -174,7 +174,7 @@ class TeamManager(TeamBase):
 
         teams = self.team_db.read()
         if team_id not in teams:
-            raise ValueError(f"Team with id:[{team_id}] not found")
+            raise ValueError(f"Team with id:{team_id} not found")
 
         team = teams[team_id]
         users = self.user_db.read()

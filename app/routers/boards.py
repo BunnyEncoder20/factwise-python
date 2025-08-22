@@ -1,8 +1,8 @@
 import json
 from fastapi import APIRouter, Depends
 
-from dependencies import get_board_manager
-from schemas import board_schemas as model
+from app.dependencies import get_board_manager
+from app.schemas import board_schemas as model
 from impl.board_manager import BoardManager
 
 router = APIRouter(prefix="/board", tags=["Project Board"])

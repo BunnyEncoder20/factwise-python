@@ -1,8 +1,8 @@
 import json
 from fastapi import APIRouter, Depends
 
-from dependencies import get_user_manager
-from schemas import user_schemas as model
+from app.dependencies import get_user_manager
+from app.schemas import user_schemas as model
 from impl.user_manager import UserManager
 
 router = APIRouter(prefix="/users", tags=["Users"])

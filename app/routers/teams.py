@@ -1,8 +1,8 @@
 import json
 from fastapi import APIRouter, Depends
 
-from dependencies import get_team_manager
-from schemas import team_schemas as model
+from app.dependencies import get_team_manager
+from app.schemas import team_schemas as model
 from impl.team_manager import TeamManager
 
 router = APIRouter(prefix="/team", tags=["Teams"])

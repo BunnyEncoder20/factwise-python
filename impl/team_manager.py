@@ -110,7 +110,7 @@ class TeamManager(TeamBase):
         if "admin" in updated_data:
             users = self.user_db.read()
             if updated_data["admin"] not in users:
-                raise ValueError(f"Admin user with id:[{updated_data['admin']}] not found")
+                raise ValueError(f"Admin user with id:{updated_data['admin']} not found")
             teams[team_id]["admin"] = updated_data["admin"]
 
             # making sure new admin is part of team

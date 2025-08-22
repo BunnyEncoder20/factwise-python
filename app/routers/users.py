@@ -5,9 +5,9 @@ from app.dependencies import get_user_manager
 from app.schemas import user_schemas as model
 from impl.user_manager import UserManager
 
-router = APIRouter(prefix="/users", tags=["Users"])
+router = APIRouter(prefix="/api/v1/users", tags=["Users"])
 
-@router.post("/create", response_model=model.CreateUserRequest)
+@router.post("/create", response_model=model.CreateUserResponse)
 def create_user(req: model.CreateUserRequest, manager: UserManager = Depends(get_user_manager)):
     response_json = manager.create_user(req.model_dump_json())
     return json.loads(response_json)

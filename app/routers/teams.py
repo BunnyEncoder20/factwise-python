@@ -5,7 +5,7 @@ from app.dependencies import get_team_manager
 from app.schemas import team_schemas as model
 from impl.team_manager import TeamManager
 
-router = APIRouter(prefix="/team", tags=["Teams"])
+router = APIRouter(prefix="/api/v1/team", tags=["Teams"])
 
 @router.post("/create", response_model=model.CreateTeamResponse)
 def create_team(req: model.CreateTeamRequest, manager: TeamManager = Depends(get_team_manager)):

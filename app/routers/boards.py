@@ -5,7 +5,7 @@ from app.dependencies import get_board_manager
 from app.schemas import board_schemas as model
 from impl.board_manager import BoardManager
 
-router = APIRouter(prefix="/board", tags=["Project Board"])
+router = APIRouter(prefix="/api/v1/board", tags=["Project Board"])
 
 @router.post("/create", response_model=model.CreateBoardResponse)
 def create_board(req: model.CreateBoardRequest, manager: BoardManager = Depends(get_board_manager)):

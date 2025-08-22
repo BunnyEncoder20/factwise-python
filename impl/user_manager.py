@@ -26,7 +26,7 @@ class UserManager(UserBase):
 
         # username must be unique
         if any(user["name"] == name for user in users.values()):
-            raise ValueError(f"username: <{name}> already exists")
+            raise ValueError(f"username <{name}> already exists")
 
         user_id = str(uuid.uuid4())
         user = {
@@ -62,7 +62,7 @@ class UserManager(UserBase):
 
         users = self.db.read()
         if user_id not in users:
-            raise ValueError(f"User with id:[{user_id}] not found")
+            raise ValueError(f"User with id:{user_id} not found")
 
         user = users[user_id]
         return json.dumps({
@@ -80,7 +80,7 @@ class UserManager(UserBase):
 
         users = self.db.read()
         if user_id not in users:
-            raise ValueError(f"User with id:[{user_id}] not found")
+            raise ValueError(f"User with id:{user_id} not found")
 
         # Constraints check
         if "name" in updated_data and updated_data["name"] != users[user_id]["name"]:
@@ -100,7 +100,7 @@ class UserManager(UserBase):
 
         users = self.db.read()
         if user_id not in users:
-            raise ValueError(f"User with id:[{user_id}] not found")
+            raise ValueError(f"User with id:{user_id} not found")
 
         # TODO: neet to make Team Manager before returning here
         return json.dumps([])

@@ -103,6 +103,7 @@ uv pip install -r requirements.txt
 - Starting FastAPI server
 ```bash
 uvicorn app.main:app --reload
+http://127.0.0.1:8080      # Server
 http://127.0.0.1:8000/docs # Swagger UI
-http://127.0.0.1:8000/docs # ReDoc
+http://127.0.0.1:8000/redox # ReDoc
 ```

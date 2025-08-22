@@ -16,9 +16,8 @@ class TeamInfo(BaseModel):
     creation_time: str
     admin: str
 
-class ListTeamsResponse(BaseModel):
-    RootModel: List[TeamInfo]
-
+class ListTeamsResponse(RootModel[List[TeamInfo]]):
+    pass
 class DescribeTeamRequest(BaseModel):
     id: str
 
@@ -56,5 +55,5 @@ class TeamUser(BaseModel):
 class ListTeamUsersRequest(BaseModel):
     id: str
 
-class ListTeamUsersResponse(BaseModel):
-    RootModel: List[TeamUser]
+class ListTeamUsersResponse(RootModel[List[TeamUser]]):
+    pass

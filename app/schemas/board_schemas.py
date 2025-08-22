@@ -39,8 +39,8 @@ class Board(BaseModel):
     id: str
     name: str
 
-class ListBoardsResponse(BaseModel):
-    RootModel: List[Board]
+class ListBoardsResponse(RootModel[List[Board]]):
+    pass
 
 class ExportBoardRequest(BaseModel):
     id: str

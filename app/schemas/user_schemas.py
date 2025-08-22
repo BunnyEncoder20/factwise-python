@@ -13,8 +13,8 @@ class User(BaseModel):
     display_name: str
     creation_time: str
 
-class ListUsersResponse(BaseModel):
-    RootModel: List[User]
+class ListUsersResponse(RootModel[List[User]]):
+    pass
 
 class DescribeUserRequest(BaseModel):
     id: str
@@ -40,5 +40,5 @@ class Team(BaseModel):
 class GetUserTeamsRequest(BaseModel):
     id: str
 
-class GetUserTeamsResponse(BaseModel):
-    RootModel: List[Team]
+class GetUserTeamsResponse(RootModel[List[Team]]):
+    pass

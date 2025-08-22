@@ -1,5 +1,5 @@
 # Schemas for Team management
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, RootModel
 from typing import List, Optional
 
 class CreateTeamRequest(BaseModel):
@@ -17,7 +17,7 @@ class TeamInfo(BaseModel):
     admin: str
 
 class ListTeamsResponse(BaseModel):
-    __root__: List[TeamInfo]
+    RootModel: List[TeamInfo]
 
 class DescribeTeamRequest(BaseModel):
     id: str
@@ -57,4 +57,4 @@ class ListTeamUsersRequest(BaseModel):
     id: str
 
 class ListTeamUsersResponse(BaseModel):
-    __root__: List[TeamUser]
+    RootModel: List[TeamUser]

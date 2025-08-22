@@ -1,5 +1,5 @@
 # Schemas for Project Board management
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, RootModel
 from typing import List, Optional
 from enum import Enum
 
@@ -40,7 +40,7 @@ class Board(BaseModel):
     name: str
 
 class ListBoardsResponse(BaseModel):
-    __root__: List[Board]
+    RootModel: List[Board]
 
 class ExportBoardRequest(BaseModel):
     id: str

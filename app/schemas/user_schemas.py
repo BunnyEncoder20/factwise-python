@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, RootModel
 from typing import List, Optional
 
 class CreateUserRequest(BaseModel):
@@ -14,7 +14,7 @@ class User(BaseModel):
     creation_time: str
 
 class ListUsersResponse(BaseModel):
-    __root__: List[User]
+    RootModel: List[User]
 
 class DescribeUserRequest(BaseModel):
     id: str
@@ -41,4 +41,4 @@ class GetUserTeamsRequest(BaseModel):
     id: str
 
 class GetUserTeamsResponse(BaseModel):
-    __root__: List[Team]
+    RootModel: List[Team]

@@ -5,7 +5,7 @@ from app.dependencies import get_team_manager
 from app.schemas import team_schemas as model
 from impl.team_manager import TeamManager
 
-router = APIRouter(prefix="/api/v1/team", tags=["Teams"])
+router = APIRouter(prefix="/api/v1/teams", tags=["Teams"])
 
 @router.post("/create", response_model=model.CreateTeamResponse)
 def create_team(req: model.CreateTeamRequest, manager: TeamManager = Depends(get_team_manager)):
@@ -17,7 +17,7 @@ def list_teams(manager: TeamManager = Depends(get_team_manager)):
     res_json = manager.list_teams()
     return json.loads(res_json)
 
-@router.get("/describe", response_model=model.DescribeTeamRequest)
+@router.get("/describe", response_model=model.DescribeTeamResponse)
 def describe_team(req: model.DescribeTeamRequest, manager: TeamManager = Depends(get_team_manager)):
     res_json = manager.describe_team(req.model_dump_json())
     return json.loads(res_json)

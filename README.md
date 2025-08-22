@@ -26,6 +26,7 @@ Hence chose **FastAPI** for this assignment.
 5. Implementing Concrete Team class.
 6. Implementing Concrete ProjectBoard class.
 7. Wrapping the Business Logic with FastAPI for backend endpoints
+8. Testing all routes with Postman
 
 ## Project Board Implementation Notes
 - create_board
@@ -98,4 +99,10 @@ python3-m unittest tests/test_user_manager.py
 - installing requirements:
 ```bash
 uv pip install -r requirements.txt
+```
+- Starting FastAPI server
+```bash
+uvicorn app.main:app --reload
+http://127.0.0.1:8000/docs # Swagger UI
+http://127.0.0.1:8000/docs # ReDoc
 ```

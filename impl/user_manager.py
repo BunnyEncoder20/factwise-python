@@ -6,8 +6,9 @@ from abstract_classes.user_base import UserBase
 from utils.file_db import FileDB
 
 class UserManager(UserBase):
-    def __init__(self, db_path='db/users.json'):
-        self.db = FileDB(db_path)
+    def __init__(self, user_db_path='db/users.json', team_db_path='db/teams.json'):
+        self.db = FileDB(user_db_path)
+        self.team_db = FileDB(team_db_path)
 
     def _validate_name(self, name: str, max_len: int):
         if not name or len(name) > max_len:
@@ -102,5 +103,12 @@ class UserManager(UserBase):
         if user_id not in users:
             raise ValueError(f"User with id:{user_id} not found")
 
-        # TODO: neet to make Team Manager before returning here
-        return json.dumps([])
+        teams = self.team_db.read()
+        user_teams = [
+            {
+                "name": team["name"],
+                "description": team["description"],
+                "creation_time": team["creation_time"]
+            } for team in teams.values() if user_id in team["users"]
+        ]
+        return json.dumps(user_teams)

@@ -48,3 +48,6 @@ db
 
 # Logs
 *.log
+
+# Exports
+out

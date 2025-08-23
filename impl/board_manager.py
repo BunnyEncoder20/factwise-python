@@ -80,7 +80,7 @@ class BoardManager(ProjectBoardBase):
 
     def add_task(self, request: str) -> str:
         data = json.loads(request)
-        board_id = data.get("bid")
+        board_id = data.get("board_id")
         task_title = data.get("title")
         description = data.get("description")
         user_id = data.get("user_id")
@@ -93,16 +93,16 @@ class BoardManager(ProjectBoardBase):
         boards = self.board_db.read()
         tasks = self.task_db.read()
 
-        board = boards.get("board_id")
+        board = boards.get(board_id)
         if not board:
-            raise ValueError(f"Board id:[{board_id}] not found")
+            raise ValueError(f"Board id:{board_id} not found")
         if board["status"] == "CLOSED":
             raise ValueError("Cannot add task to closed board")
 
         # task title must be unique for board
         if any(
             task["title"] == task_title and task["board_id"] == board_id for task in tasks.values()
-        ): raise ValueError(f"Task with title '{task_title}' already exist under Board:[{board_id}]")
+        ): raise ValueError(f"Task with title '{task_title}' already exist under Board:{board_id}")
 
         task_id = str(uuid.uuid4())
         task = {
@@ -130,7 +130,7 @@ class BoardManager(ProjectBoardBase):
 
         tasks = self.task_db.read()
         if task_id not in tasks:
-            raise ValueError(f"Task id:[{task_id}] not found")
+            raise ValueError(f"Task id:{task_id} not found")
 
         tasks[task_id]["status"] = updated_status
         self.task_db.write(tasks)
@@ -161,7 +161,7 @@ class BoardManager(ProjectBoardBase):
         tasks = self.task_db.read()
 
         if board_id not in boards:
-            raise ValueError(f"Board id:[{board_id}] not found")
+            raise ValueError(f"Board id:{board_id} not found")
 
         board = boards[board_id]
         board_tasks = [task for task in tasks.values() if task["board_id"] == board_id]

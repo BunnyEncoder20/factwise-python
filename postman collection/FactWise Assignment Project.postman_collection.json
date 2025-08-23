@@ -1,0 +1,531 @@
+{
+	"info": {
+		"_postman_id": "898e9c0e-149a-45c0-8018-23513ee4ca77",
+		"name": "FactWise Assignment Project",
+		"description": "For testing all the APIs in FactWise Assignment Projects",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37383503",
+		"_collection_link": "https://team-name-1.postman.co/workspace/Local-FastAPI-Projects~8c5aa461-8666-4b9d-a07f-34aa01d567f9/collection/37383503-898e9c0e-149a-45c0-8018-23513ee4ca77?action=share&source=collection_link&creator=37383503"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "list_users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{version}}/users/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "describe_user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// Valid ID\n// {\n//     \"id\": \"0a78a9f3-2ea8-424f-8664-42fb74d7887c\"\n// }\n\n// Invalid ID\n// {\n//     \"id\": \"0a78a9f3-2ea8-424f-8664-42fb74d7887cb\"\n// }\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{version}}/users/describe",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"users",
+								"describe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_user_teams",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// Valid ID\n// {\n//     \"id\": \"0a78a9f3-2ea8-424f-8664-42fb74d7887c\"\n// }\n\n// Invalid ID\n// {\n//     \"id\": \"0a78a9f3-2ea8-424f-8664-42fb74d7887cb\"\n// }\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{version}}/users/get_user_teams",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"users",
+								"get_user_teams"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//     \"name\": \"bunny_encoder\",\n//     \"display_name\": \"Varun Verma\"\n// }\n// {\n//     \"name\": \"fairly_fire\",\n//     // \"display_name\": \"Soma Senpai\"\n// }\n\n// {\n//   \"name\": \"alice_wonder\",\n//   \"display_name\": \"Alice Wonder\"\n// }\n// {\n//   \"name\": \"bob_builder\",\n//   \"display_name\": \"Bob Builder\"\n// }\n// {\n//   \"name\": \"charlie_choco\",\n//   \"display_name\": \"Charlie Choco\"\n// }\n// {\n//   \"name\": \"diana_prince\",\n//   \"display_name\": \"Diana Prince\"\n// }\n// {\n//   \"name\": \"ethan_hunt\",\n//   \"display_name\": \"Ethan Hunt\"\n// }\n// {\n//   \"name\": \"fiona_frost\",\n//   \"display_name\": \"Fiona Frost\"\n// }\n// {\n//   \"name\": \"george_clark\",\n//   \"display_name\": \"George Clark\"\n// }\n// {\n//   \"name\": \"harry_potter\",\n//   \"display_name\": \"Harry Potter\"\n// }\n// {\n//   \"name\": \"ivy_green\",\n//   \"display_name\": \"Ivy Green\"\n// }\n// {\n//   \"name\": \"jack_sparrow\",\n//   \"display_name\": \"Jack Sparrow\"\n// }\n// {\n//   \"name\": \"karen_smith\",\n//   \"display_name\": \"Karen Smith\"\n// }\n// {\n//   \"name\": \"leo_dicap\",\n//   \"display_name\": \"Leo Dicap\"\n// }\n// {\n//   \"name\": \"mia_wallace\",\n//   \"display_name\": \"Mia Wallace\"\n// }\n// {\n//   \"name\": \"nick_fury\",\n//   \"display_name\": \"Nick Fury\"\n// }\n// {\n//   \"name\": \"olivia_jones\",\n//   \"display_name\": \"Olivia Jones\"\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{version}}/users/create",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"users",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// No change\n// {\n//     \"id\": \"0a78a9f3-2ea8-424f-8664-42fb74d7887c\",\n//     \"user\": {\n//         \"name\": \"bunny_encoder\",\n//         \"display_name\": \"Varun Verma\"\n//     }\n// }\n\n// Changes Made\n// {\n//     \"id\": \"0a78a9f3-2ea8-424f-8664-42fb74d7887c\",\n//     \"user\": {\n//         \"name\": \"bunny_encoder\",\n//         \"display_name\": \"The Legendary Coder\"\n//     }\n// }\n\n\n// Trying to update username\n// {\n//     \"id\": \"0a78a9f3-2ea8-424f-8664-42fb74d7887c\",\n//     \"user\": {\n//         \"name\": \"bunny_encoder100\",\n//         \"display_name\": \"Varun Verma\"\n//     }\n// }\n\n// Invalid ID\n// {\n//     \"id\": \"0a78a9f3-2ea8-424f-8664-42fb74d7887c100\",\n//     \"user\": {\n//         \"name\": \"bunny_encoder\",\n//         \"display_name\": \"Varun Verma\"\n//     }\n// }\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{version}}/users/update",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"users",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Teams",
+			"item": [
+				{
+					"name": "create_team",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//     \"name\": \"Team Alpha\",\n//     \"description\": \"The Best Team. Makes the problem go away for sure. Fire and Forget\",\n//     \"admin\": \"0a78a9f3-2ea8-424f-8664-42fb74d7887c\"\n// }\n\n// {\n//     \"name\": \"Team Beta\",\n//     \"description\": \"One of the best Teams.\",\n//     \"admin\": \"4b2f6834-9dcc-4104-8a6c-c791e139038e\"\n// }\n\n// {\n//     \"name\": \"Team Charlie\",\n//     \"description\": \"The dark horses.\",\n//     \"admin\": \"0a78a9f3-2ea8-424f-8664-42fb74d7887c\"\n// }\n\n// {\n//     \"name\": \"Team Delta\",\n//     \"description\": \"The Delta Force.\",\n//     \"admin\": \"4b2f6834-9dcc-4104-8a6c-c791e139038e\"\n// }\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{version}}/teams/create",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"teams",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_team",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// Changes Mades Successfully\n// {\n//     \"id\": \"ff970339-1719-4519-b0a5-c133a9f18629\",\n//     \"team\": {\n//         \"name\": \"Team Alpha\",\n//         \"description\": \"The Best Team.\",\n//         \"admin\": \"0a78a9f3-2ea8-424f-8664-42fb74d7887c\"\n//     }\n// }\n\n// Invalid New Admin\n// {\n//     \"id\": \"ff970339-1719-4519-b0a5-c133a9f18629\",\n//     \"team\": {\n//         \"name\": \"Team Alpha\",\n//         \"description\": \"The Best Team.\",\n//         \"admin\": \"0a78a9f3-2ea8-424f-8664-42fb74d7887c###\"\n//     }\n// }\n\n// New Admin\n// {\n//     \"id\": \"ff970339-1719-4519-b0a5-c133a9f18629\",\n//     \"team\": {\n//         \"name\": \"Team Alpha\",\n//         \"description\": \"The Best Team.\",\n//         \"admin\": \"4b2f6834-9dcc-4104-8a6c-c791e139038e\"\n//     }\n// }\n\n\n// Invalid team ID\n// {\n//     \"id\": \"ff970339-1719-4519-b0a5-c133a9f18629###\",\n//     \"team\": {\n//         \"name\": \"Team Alpha\",\n//         \"description\": \"The Best Team.\",\n//         \"admin\": \"0a78a9f3-2ea8-424f-8664-42fb74d7887c\"\n//     }\n// }\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{version}}/teams/update",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"teams",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_users_to_team",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// Adding to team Alpha\n// {\n//     \"id\": \"ff970339-1719-4519-b0a5-c133a9f18629\",\n//     \"users\": [\n//         \"080ca11f-0cc6-45d8-a0b8-41d48ce35c28\",\n//         \"71c2978c-b7f5-482d-9da0-7ab2dec26292\",\n//         \"4e87322b-3ce3-4116-a7e2-4280b083b85b\",\n//         \"847c47ee-f3ae-4af6-a0c7-a14e7befc1ea\"\n//     ]\n// }\n\n// Adding to team Beta\n// {\n//     \"id\": \"056e34ed-cdec-4069-8099-93dbdf3dc5c6\",\n//     \"users\": [\n//         \"d7f24f07-25a4-4fca-b6ca-c02c2619c07f\",\n//         \"09708943-9b83-4ea8-92fa-2e27e97d7820\",\n//         \"88a77b30-55f8-4ad4-8e5a-cbcb8cae2ec6\",\n//         \"8da0ea78-557b-4acc-8dc2-8a3771280896\",\n//         \"0a78a9f3-2ea8-424f-8664-42fb74d7887c\"\n//     ]\n// }\n\n// Adding to team Charlie\n// {\n//     \"id\": \"b2f65bb2-de2e-47b1-9b0b-df5873af031b\",\n//     \"users\": [\n//         \"69aa4260-41e2-4a92-8b67-c24fe311fce3\",\n//         \"42cce496-a77b-40ab-a7a2-f894370e9626\",\n//         \"10d39566-53e8-4dbe-a2d8-93d278f08119\",\n//         \"b9bee251-3f49-47f7-a601-506d1794c21a\",\n//         \"0a78a9f3-2ea8-424f-8664-42fb74d7887c\"\n//     ]\n// }\n\n// Adding to team Delta\n// {\n//     \"id\": \"3486fd6b-c702-4609-88b6-ec9992aa7c0e\",\n//     \"users\": [\n//         \"4b6e574b-627f-4c05-8070-75e2912f42f6\",\n//         \"3b018c48-a5c9-4406-be90-70ee65ee0188\",\n//         \"575a1d26-afa9-4dc8-be64-3e5cb71c15c2\",\n//         \"4b2f6834-9dcc-4104-8a6c-c791e139038e\",\n//         \"0a78a9f3-2ea8-424f-8664-42fb74d7887c\"\n//     ]\n// }\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{version}}/teams/add_to_team",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"teams",
+								"add_to_team"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove_users_from_team",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// Removing to team Alpha\n// {\n//     \"id\": \"ff970339-1719-4519-b0a5-c133a9f18629\",\n//     \"users\": [\n//         \"080ca11f-0cc6-45d8-a0b8-41d48ce35c28\",\n//         \"71c2978c-b7f5-482d-9da0-7ab2dec26292\"\n//     ]\n// }\n\n// Removing to team Beta\n// {\n//     \"id\": \"056e34ed-cdec-4069-8099-93dbdf3dc5c6\",\n//     \"users\": [\n//         \"d7f24f07-25a4-4fca-b6ca-c02c2619c07f\",\n//         \"09708943-9b83-4ea8-92fa-2e27e97d7820\"\n//     ]\n// }\n\n// Removing to team Charlie\n// {\n//     \"id\": \"b2f65bb2-de2e-47b1-9b0b-df5873af031b\",\n//     \"users\": [\n//         \"69aa4260-41e2-4a92-8b67-c24fe311fce3\",\n//         \"42cce496-a77b-40ab-a7a2-f894370e9626\"\n//     ]\n// }\n\n// Removing to team Delta\n// {\n//     \"id\": \"3486fd6b-c702-4609-88b6-ec9992aa7c0e\",\n//     \"users\": [\n//         \"4b6e574b-627f-4c05-8070-75e2912f42f6\",\n//         \"3b018c48-a5c9-4406-be90-70ee65ee0188\"\n//     ]\n// }\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{version}}/teams/remove_from_team",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"teams",
+								"remove_from_team"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list_teams",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{version}}/teams/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"teams",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "describe_team",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// Team Alpha\n// {\n//     \"id\": \"ff970339-1719-4519-b0a5-c133a9f18629\"\n// }\n\n// Team Beta\n// {\n//     \"id\": \"056e34ed-cdec-4069-8099-93dbdf3dc5c6\"\n// }\n\n// Team Charlie\n// {\n//     \"id\": \"b2f65bb2-de2e-47b1-9b0b-df5873af031b\"\n// }\n\n// Team Delta\n// {\n//     \"id\": \"3486fd6b-c702-4609-88b6-ec9992aa7c0e\"\n// }\n\n// Invalid ID\n// {\n//     \"id\": \"ff970339-1719-4519-b0a5-c133a9f18629###\"\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{version}}/teams/describe",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"teams",
+								"describe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list_team_users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// Team Alpha\n// {\n//     \"id\": \"ff970339-1719-4519-b0a5-c133a9f18629\"\n// }\n\n// Team Beta\n// {\n//     \"id\": \"056e34ed-cdec-4069-8099-93dbdf3dc5c6\"\n// }\n\n// Team Charlie\n// {\n//     \"id\": \"b2f65bb2-de2e-47b1-9b0b-df5873af031b\"\n// }\n\n// Team Delta\n// {\n//     \"id\": \"3486fd6b-c702-4609-88b6-ec9992aa7c0e\"\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{version}}/teams/members",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"teams",
+								"members"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Boards",
+			"item": [
+				{
+					"name": "create_board",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// Valid Board Create\n// {\n//     \"name\" : \"Board A\",\n//     \"description\" : \"first project board\",\n//     \"team_id\" : \"ff970339-1719-4519-b0a5-c133a9f18629\",\n//     \"creation_time\" : \"2025-08-22T23:35:17.300126\"\n// }\n\n// Same Board name for A team\n// {\n//     \"name\" : \"Board A\",\n//     \"description\" : \"first project board\",\n//     \"team_id\" : \"ff970339-1719-4519-b0a5-c133a9f18629\",\n//     \"creation_time\" : \"2025-08-23T10:47:34.539349\"\n// }\n\n// {\n//     \"name\" : \"Board B\",\n//     \"description\" : \"first project board\",\n//     \"team_id\" : \"056e34ed-cdec-4069-8099-93dbdf3dc5c6\",\n//     \"creation_time\" : \"2025-08-23T10:47:34.539349\"\n// }\n\n// {\n//     \"name\" : \"Board C\",\n//     \"description\" : \"first project board\",\n//     \"team_id\" : \"b2f65bb2-de2e-47b1-9b0b-df5873af031b\",\n//     \"creation_time\" : \"2025-08-21T10:48:34.161061\"\n// }\n\n// {\n//     \"name\" : \"Board D\",\n//     \"description\" : \"first project board\",\n//     \"team_id\" : \"3486fd6b-c702-4609-88b6-ec9992aa7c0e\",\n//     \"creation_time\" : \"2025-08-20T12:48:34.161061\"\n// }\n\n// dummy board\n// {\n//     \"name\" : \"Board Dummy\",\n//     \"description\" : \"Experimental Temp Board\",\n//     \"team_id\" : \"ff970339-1719-4519-b0a5-c133a9f18629\",\n//     \"creation_time\" : \"2025-08-23T11:08:37.182463\"\n// }\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{version}}/board/create",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"board",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "close_board",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// Close Dummy board\n// {\n//     \"id\": \"add27f4f-02e5-4bab-8d57-2e6d81585c93\"\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{version}}/board/close",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"board",
+								"close"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_task",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// Board A Tasks\n// {\n//     \"board_id\": \"a11ff87c-e9b9-49a7-83a4-2f5fcce1439e\",\n//     \"title\": \"Design login screen\",\n//     \"description\": \"Create UI and backend integration for login flow.\",\n//     \"user_id\": \"0a78a9f3-2ea8-424f-8664-42fb74d7887c\",\n//     \"creation_time\": \"2025-08-19T09:15:00Z\"\n// }\n\n// {\n//     \"board_id\": \"a11ff87c-e9b9-49a7-83a4-2f5fcce1439e\",\n//     \"title\": \"Add password reset feature\",\n//     \"description\": \"Implement forgot password and reset via email link.\",\n//     \"user_id\": \"71c2978c-b7f5-482d-9da0-7ab2dec26292\",\n//     \"creation_time\": \"2025-08-19T09:45:00Z\"\n// }\n\n// Board B Tasks\n// {\n//     \"board_id\": \"5dd3d936-7675-4b22-b02e-54c5853c876c\",\n//     \"title\": \"Set up CI/CD pipeline\",\n//     \"description\": \"Configure GitHub Actions for automated testing and deployment.\",\n//     \"user_id\": \"4e87322b-3ce3-4116-a7e2-4280b083b85b\",\n//     \"creation_time\": \"2025-08-19T10:10:00Z\"\n// }\n\n//  {\n//     \"board_id\": \"5dd3d936-7675-4b22-b02e-54c5853c876c\",\n//     \"title\": \"Containerize service\",\n//     \"description\": \"Dockerize the main API and prepare for Kubernetes deployment.\",\n//     \"user_id\": \"847c47ee-f3ae-4af6-a0c7-a14e7befc1ea\",\n//     \"creation_time\": \"2025-08-19T10:40:00Z\"\n//   }\n\n// Board C tasks\n// {\n//     \"board_id\": \"331e3879-b1d4-4ce2-a04f-60a6a08debab\",\n//     \"title\": \"Implement search filter\",\n//     \"description\": \"Add task filtering by title and creation date.\",\n//     \"user_id\": \"d7f24f07-25a4-4fca-b6ca-c02c2619c07f\",\n//     \"creation_time\": \"2025-08-19T11:00:00Z\"\n// }\n// {\n//     \"board_id\": \"331e3879-b1d4-4ce2-a04f-60a6a08debab\",\n//     \"title\": \"Optimize database queries\",\n//     \"description\": \"Refactor queries to reduce response time for task listing.\",\n//     \"user_id\": \"09708943-9b83-4ea8-92fa-2e27e97d7820\",\n//     \"creation_time\": \"2025-08-19T11:20:00Z\"\n// }\n\n// Board D tasks\n// {\n//     \"board_id\": \"c061ff9b-757a-4968-a0a2-c1643c608de2\",\n//     \"title\": \"Redesign landing page\",\n//     \"description\": \"Update layout and improve responsiveness on mobile devices.\",\n//     \"user_id\": \"88a77b30-55f8-4ad4-8e5a-cbcb8cae2ec6\",\n//     \"creation_time\": \"2025-08-19T11:45:00Z\"\n// }\n// {\n//     \"board_id\": \"c061ff9b-757a-4968-a0a2-c1643c608de2\",\n//     \"title\": \"Accessibility improvements\",\n//     \"description\": \"Add ARIA labels and improve color contrast.\",\n//     \"user_id\": \"8da0ea78-557b-4acc-8dc2-8a3771280896\",\n//     \"creation_time\": \"2025-08-19T12:10:00Z\"\n// }\n\n// Board Dummy Tasks (Cannot add to closed Board)\n// {\n//     \"board_id\": \"add27f4f-02e5-4bab-8d57-2e6d81585c93\",\n//     \"title\": \"Add unit tests\",\n//     \"description\": \"Increase code coverage for core business logic.\",\n//     \"user_id\": \"42cce496-a77b-40ab-a7a2-f894370e9626\",\n//     \"creation_time\": \"2025-08-19T12:50:00Z\"\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{version}}/board/add_task",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"board",
+								"add_task"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_task_status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// COMPLETE tasks in board A\n// {\n//     \"id\": \"7115a783-a2ef-406d-8492-d6e60c2d2205\",\n//     \"status\": \"COMPLETE\"\n// }\n// {\n//     \"id\": \"6aa64d9b-0f93-4827-b63b-49287d33b4e6\",\n//     \"status\": \"COMPLETE\"\n// }\n\n// IN_PROGRESS board B\n// {\n//     \"id\": \"26da20e2-7368-483b-8161-a6fc2199396e\",\n//     \"status\": \"IN_PROGRESS\"\n// }\n// {\n//     \"id\": \"f1e26676-4197-45bb-bc93-7553d890afc9\",\n//     \"status\": \"IN_PROGRESS\"\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{version}}/board/update_task_status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"board",
+								"update_task_status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list_team_boards",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// Team Alpha\n// {\n//     \"id\": \"ff970339-1719-4519-b0a5-c133a9f18629\"\n// }\n\n// Team Beta\n// {\n//     \"id\": \"056e34ed-cdec-4069-8099-93dbdf3dc5c6\"\n// }\n\n// Team Charlie\n// {\n//     \"id\": \"b2f65bb2-de2e-47b1-9b0b-df5873af031b\"\n// }\n\n// Team Delta\n// {\n//     \"id\": \"3486fd6b-c702-4609-88b6-ec9992aa7c0e\"\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{version}}/board/team_boards",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"board",
+								"team_boards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "export_board",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// Board A\n// {\n//     \"id\": \"a11ff87c-e9b9-49a7-83a4-2f5fcce1439e\"\n// }\n\n// Board B\n// {\n//     \"id\": \"5dd3d936-7675-4b22-b02e-54c5853c876c\"\n// }\n\n// BOard C\n// {\n//     \"id\": \"331e3879-b1d4-4ce2-a04f-60a6a08debab\"\n// }\n\n// BOard D\n// {\n//     \"id\": \"c061ff9b-757a-4968-a0a2-c1643c608de2\"\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{version}}/board/export",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{version}}",
+								"board",
+								"export"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

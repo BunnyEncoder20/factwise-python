@@ -20,6 +20,7 @@ class AddTaskRequest(BaseModel):
     title: str = Field(max_length=64)
     description: Optional[str] = Field(max_length=128)
     user_id: str
+    creation_time: str
 
 class AddTaskResponse(BaseModel):
     id: str

@@ -7,6 +7,7 @@ class CreateBoardRequest(BaseModel):
     name: str = Field(max_length=64)
     description: Optional[str] = Field(max_length=128)
     team_id: str
+    creation_time: str
 
 class CreateBoardResponse(BaseModel):
     id: str

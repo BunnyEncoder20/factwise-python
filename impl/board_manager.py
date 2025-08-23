@@ -147,7 +147,7 @@ class BoardManager(ProjectBoardBase):
                 "id": board["id"], "name": board["name"]
             }
             for board in boards.values()
-            if board["team"] == team_id and board["status"] == 'OPEN'
+            if board["team_id"] == team_id and board["status"] == 'OPEN'
         ]
 
         return json.dumps(team_open_boards, indent=4)

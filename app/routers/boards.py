@@ -27,7 +27,7 @@ def update_task_status(req: model.UpdateTaskStatusRequest, manager: BoardManager
     res_json = manager.update_task_status(req.model_dump_json())
     return json.loads(res_json)
 
-@router.get("/", response_model=model.ListBoardsResponse)
+@router.get("/team_boards", response_model=model.ListBoardsResponse)
 def list_boards(req: model.ListBoardsRequest, manager: BoardManager = Depends(get_board_manager)):
     res_json = manager.list_boards(req.model_dump_json())
     return json.loads(res_json)

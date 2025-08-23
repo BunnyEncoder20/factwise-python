@@ -12,6 +12,11 @@ def create_board(req: model.CreateBoardRequest, manager: BoardManager = Depends(
     res_json = manager.create_board(req.model_dump_json())
     return json.loads(res_json)
 
+@router.get("/")
+def list_all_boards(manager: BoardManager = Depends(get_board_manager)):
+    res_json = manager.list_all_boards()
+    return json.loads(res_json)
+
 @router.post("/close")
 def close_board(req: model.CloseBoardRequest, manager: BoardManager = Depends(get_board_manager)):
     res_json = manager.close_board(req.model_dump_json())

@@ -136,6 +136,22 @@ class BoardManager(ProjectBoardBase):
         self.task_db.write(tasks)
         return json.dumps({"id": task_id, "status": tasks[task_id]["status"]})
 
+    def list_all_boards(self) -> str:
+        boards = self.board_db.read()
+        all_boards = [
+            {
+                "id": board["id"],
+                "name": board["name"],
+                "team_id": board["team_id"],
+                "creation_time": board["creation_time"],
+                "status": board["status"],
+                "end_time": board["end_time"]
+            }
+            for board in boards.values()
+        ]
+
+        return json.dumps(all_boards, indent=4)
+
     def list_boards(self, request: str) -> str:
         team_id = json.loads(request).get("id")
         if not team_id:

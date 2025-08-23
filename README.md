@@ -1,109 +1,184 @@
 # FactWise Python Mini Project
 
-## Tech Stack
-- Django
-	-	Pros:
-	    - aligns with company stack, ORM built-in, batteries included.
-	-	Cons:
-	    - Heavy for this small assignment.
-		- Forces me into migrations, DB-style modeling (but problem states file-based persistence, not RDBMS).
+A team project planner tool with REST APIs for managing users, teams, and project boards with task management capabilities.
 
-- FastAPI
-	-	Pros:
-	    - Lightweight,
-		- fast to implement REST APIs.
-		- JSON I/O handling is built-in with Pydantic models → perfectly aligns with requirement.
-		- Shows I can design clean, modular and production-grade APIs.
-	- Assignment gives freedom of Python Library.
+## Overview
 
-Hence chose **FastAPI** for this assignment.
+This project implements a comprehensive project management system that allows:
+- **User Management**: Create, update, list, and manage users
+- **Team Management**: Create teams, add/remove members, and manage team hierarchies
+- **Project Board Management**: Create boards, manage tasks, and track project progress
 
-## Implementations Order:
-1. FileDB class (for persistent json storage)
-2. Converting all base classes into Abstract classes and methods
-3. Implementing Concrete User class. (Cause team and ProjectBoard will depend on it)
-4. Made some unittest to check functioning of UserManager Class
-5. Implementing Concrete Team class.
-6. Implementing Concrete ProjectBoard class.
-7. Wrapping the Business Logic with FastAPI for backend endpoints
-8. Testing all routes with Postman
+The application uses file-based JSON storage for persistence and provides a clean REST API interface.
 
-## Project Board Implementation Notes
-- create_board
-    - Validate name uniqueness within the given team.
-    - Enforce max length on name (64) and description (128).
-    - Add board to self.boards.
+## Tech Stack & Architecture Decision
 
-- close_board
-    - Only allowed if all tasks are "COMPLETE".
-    - Set status="CLOSED" and end_time=now.
+### Why FastAPI?
+After evaluating Django vs FastAPI:
 
-- add_task
-    - Check board exists and is OPEN.
-    - Task title unique within board.
-    - Enforce max length on title (64) and description (128).
+**Django**:
+- ✅ Aligns with company stack, ORM built-in, batteries included
+- ❌ Too heavy for this assignment
+- ❌ Forces migrations and DB-style modeling (requirement specifies file-based persistence)
 
-- update_task_status
-    - Change status among OPEN, IN_PROGRESS, COMPLETE.
+**FastAPI**:
+- ✅ Lightweight and fast for REST API implementation
+- ✅ Built-in JSON I/O with Pydantic models (perfect for requirements)
+- ✅ Demonstrates clean, modular, production-grade API design
+- ✅ Assignment allows freedom of Python library choice
 
-- list_boards
-    - Return all OPEN boards for a given team_id.
+**Decision**: Chose FastAPI for optimal alignment with requirements.
 
-- export_board
-    - Generate a .txt file in out/ folder.
-    - Pretty print board metadata + task list with statuses.
+## Project Structure
 
-```bash
-# Board Data Structure
-self.boards = {
-    "<board_id>": {
-        "id": "<board_id>",
-        "name": "<board_name>",
-        "description": "<desc>",
-        "team_id": "<team_id>",
-        "creation_time": "<ts>",
-        "end_time": None,
-        "status": "OPEN | CLOSED"
-        #"tasks": {}   # tasks dictionary keyed by task_id
-    }
-}
+```
+factwise-python/
+├── abstract_classes/          # Base abstract classes
+├── impl/                      # Concrete implementations
+├── app/                       # FastAPI application
+├── tests/                     # Unit tests
+├── db/                        # JSON file storage (created at runtime)
+└── requirements.txt           # Dependencies
+```
 
-# Task Data Structure
-"tasks": {
-    "<task_id>": {
-        "id": "<task_id>",
-        "title": "<title>",
-        "description": "<desc>",
-        "user_id": "<assigned_user>",
-        "creation_time": "<ts>",
-        "status": "OPEN | IN_PROGRESS | COMPLETE"
-    }
+## Implementation Approach
+
+1. **FileDB Class**: JSON-based persistent storage system
+2. **Abstract Base Classes**: Converted provided classes to proper abstract classes
+3. **User Manager**: Core implementation (dependency for teams and boards)
+4. **Unit Testing**: Comprehensive testing for UserManager functionality
+5. **Team Manager**: Team creation and member management
+6. **Board Manager**: Project boards and task management
+7. **REST API Layer**: FastAPI wrapper for all business logic
+8. **API Testing**: Comprehensive testing via Postman
+
+## Data Models
+
+### User Schema
+```json
+{
+  "id": "uuid4()",
+  "name": "string",
+  "display_name": "string",
+  "description": "string",
+  "creation_time": "ISO datetime"
 }
 ```
 
-## Assumptions
+### Team Schema
+```json
+{
+  "id": "uuid4()",
+  "name": "string",
+  "description": "string",
+  "admin": "user_id",
+  "users": ["user_id1", "user_id2"],
+  "creation_time": "ISO datetime"
+}
+```
 
-### Add Task method missing inputs
-- The input of the add_task method under project_board_base abstract class were unclear and incomplete.
-- I've assumped that the necessary details:
-    - board_id
-    - user_id
-- have been provided.
-- Have made the changes to the base abs class also.
+### Board & Task Schema
+```json
+{
+  "board": {
+    "id": "uuid4()",
+    "name": "string",
+    "description": "string",
+    "team_id": "team_id",
+    "creation_time": "ISO datetime",
+    "end_time": "ISO datetime | null",
+    "status": "OPEN | CLOSED"
+  },
+  "task": {
+    "id": "uuid4()",
+    "title": "string",
+    "description": "string",
+    "user_id": "assigned_user_id",
+    "creation_time": "ISO datetime",
+    "status": "OPEN | IN_PROGRESS | COMPLETE"
+  }
+}
+```
 
-## Important Commands:
-- running unit tests:
+## Setup & Installation
+
+### Prerequisites
+- Python 3.7+
+- pip or uv package manager
+
+### Installation Steps
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/BunnyEncoder20/factwise-python
+   cd factwise-python
+   ```
+
+2. **Install dependencies**
+   ```bash
+   # Using pip
+   pip install -r requirements.txt
+
+   # Or using uv (faster)
+   uv pip install -r requirements.txt
+   ```
+
+3. **Run the application**
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+
+4. **Access the API**
+   - **API Server**: http://127.0.0.1:8000
+   - **Swagger UI**: http://127.0.0.1:8000/docs
+   - **ReDoc**: http://127.0.0.1:8000/redoc
+
+5. **Testing with Postman**
+    - Have include the Postman collection of the project within the 'postman collection' dir
+    ```bash
+    ./'postman collection'/'FactWise Assignment Project.postman_collection.json'
+    ```
+    - These can imported directly into Postman
+
+### Testing
+
 ```bash
-python3-m unittest tests/test_user_manager.py
+# Run all tests
+python -m unittest discover tests/
+
+# Run specific test file
+python -m unittest tests/test_user_manager.py
 ```
-- installing requirements:
-```bash
-uv pip install -r requirements.txt
-```
-- Starting FastAPI server
-```bash
-uvicorn app.main:app --reload
-http://127.0.0.1:8080      # Server
-http://127.0.0.1:8000/docs # Swagger UI
-http://127.0.0.1:8000/redox # ReDoc
-```
+
+## Key Design Decisions & Assumptions
+
+### File-based Storage
+- JSON files stored in `db/` directory (auto-created)
+- Each entity type (users, teams, boards) has separate JSON files
+- Thread-safe file operations with proper locking
+
+### Abstract Class Enhancement
+- Enhanced provided abstract classes with proper `@abstractmethod` decorators
+- Added missing method signatures for complete API coverage
+
+### Add Task Method Fix
+- **Issue**: Original `add_task` method in `project_board_base` had incomplete parameters
+- **Solution**: Added required `board_id` and `user_id` parameters
+- **Rationale**: Tasks must be associated with specific boards and assigned to users
+
+### UUID Generation
+- All entities use UUID4 for unique identification
+- Ensures no ID conflicts and better scalability
+
+### Error Handling
+- Comprehensive exception handling for invalid inputs
+- Proper HTTP status codes returned via FastAPI
+- Detailed error messages for debugging
+
+## API Features
+
+- **RESTful Design**: Follows REST conventions
+- **Input Validation**: Pydantic models ensure data integrity
+- **Error Handling**: Consistent error responses
+- **Documentation**: Auto-generated OpenAPI docs
+- **Testing**: Comprehensive unit test coverage of business logic

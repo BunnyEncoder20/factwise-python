@@ -16,7 +16,7 @@ class CloseBoardRequest(BaseModel):
     id: str
 
 class AddTaskRequest(BaseModel):
-    bid: str = Field(alias="board_id")
+    board_id: str
     title: str = Field(max_length=64)
     description: Optional[str] = Field(max_length=128)
     user_id: str
